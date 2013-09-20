@@ -1,0 +1,4 @@
+[alias]
+	st = status
+	ci = commit
+	aa = add --all
