@@ -20,4 +20,5 @@ alias de='RAILS_ENV=development'
 alias rds='rake db:seed'
 alias begin='rake notes:custom ANNOTATION=BEGIN'
 alias okeefe='rake notes:custom ANNOTATION=OKEEFE'
+alias codify='rake notes:custom ANNOTATION=CODIFY'
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
