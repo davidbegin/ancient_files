@@ -1,6 +1,5 @@
-call pathogen#infect()
-syntax on
 filetype plugin indent on
+syntax on
 
 set tabstop=2
 set shiftwidth=2
@@ -21,6 +20,23 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e   :edit %%
 map ,s :w\|:!rspec spec<cr>
 map ,c :w\|:!cucumber<cr>
-map ,r :w\|:!ruby %:t<cr>
+map ,r :w\|:!ruby %:p<cr>
+map ,n :w\|:!ruby %:t
 map ,t :w\|:!rspec %:p<cr>
+map ,p :w\|:!python %:t<cr>
+map <leader>o :!bundle open 
+map ,, <esc>:w<cr>
+map ,q :q<cr>
+map ff /" do<cr> 
 
+map <leader>cp :topleft 50 :vs %<cr>
+
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
+autocmd BufReadPost *
+\ 	if line("'\"") > 0 && line("'\"") <= line("$") |
+\   exe "normal! g`\"" |
+\ endif
