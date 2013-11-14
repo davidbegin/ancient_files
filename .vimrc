@@ -1,35 +1,38 @@
 filetype plugin indent on
 syntax on
+set number
+set numberwidth=2
 
 set tabstop=2
 set shiftwidth=2
 
-map <leader>vv  :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>cc  :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>mm  :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>js  :CommandTFlush<cr>\|:CommandT app/assets/javascripts<cr>
-map <leader>css :CommandTFlush<cr>\|:CommandT app/assets/stylesheets<cr>
-map <leader>rs  :CommandTFlush<cr>\|:CommandT spec<cr>
-map <leader>gg  :topleft 75 :vs Gemfile<cr>
-map <leader>rr  :topleft 75 :vs config/routes.rb<cr>
-map <leader>app :topleft 75 :vs config/application.rb<cr>
-map <leader>ss  :topleft 75 :vs db/seeds.rb<cr>
-map <leader>log  :topleft 75 :vs log/development.log<cr>
-map <leader>mig :CommandTFlush<cr>\|:CommandT db/migrate<cr>
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e   :edit %%
-map ,s :w\|:!rspec spec<cr>
-map ,c :w\|:!cucumber<cr>
-map ,r :w\|:!ruby %:p<cr>
-map ,n :w\|:!ruby %:t
-map ,t :w\|:!rspec %:p<cr>
-map ,p :w\|:!python %:t<cr>
-map <leader>o :!bundle open 
-map ,, <esc>:w<cr>
-map ,q :q<cr>
-map ff /" do<cr> 
 
-map <leader>cp :topleft 50 :vs %<cr>
+noremap <leader>vv  :CommandTFlush<cr>\|:CommandT app/views<cr>
+noremap <leader>cc  :CommandTFlush<cr>\|:CommandT app/controllers<cr>
+noremap <leader>mm  :CommandTFlush<cr>\|:CommandT app/models<cr>
+noremap <leader>js  :CommandTFlush<cr>\|:CommandT app/assets/javascripts<cr>
+noremap <leader>css :CommandTFlush<cr>\|:CommandT app/assets/stylesheets<cr>
+noremap <leader>rs  :CommandTFlush<cr>\|:CommandT spec<cr>
+noremap <leader>gg  :vs Gemfile<cr>
+noremap <leader>rr  :vs config/routes.rb<cr>
+noremap <leader>app :vs config/application.rb<cr>
+noremap <leader>ss  :vs db/seeds.rb<cr>
+noremap <leader>log :vs log/development.log<cr>
+noremap <leader>mig :CommandTFlush<cr>\|:CommandT db/migrate<cr>
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+noremap <leader>e   :edit %%
+noremap ,s :w\|:!rspec<cr>
+noremap ,f :w\|:!rspec --tag focus<cr>
+" noremap ,c :w\|:!cucumber<cr>
+noremap ,r :w\|:!ruby %:p<cr>
+noremap ,n :w\|:!ruby %:t
+noremap ,t :w\|:!rspec %:p<cr>
+noremap ,p :w\|:!python %:t<cr>
+noremap <leader>o :!bundle open 
+noremap ,, <esc>:w<cr>
+noremap ,q :q<cr>
+noremap <leader>rc :source ~/.vimrc<cr>
+noremap <leader>cp :topleft 50 :vs %<cr>
 
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
@@ -40,3 +43,32 @@ autocmd BufReadPost *
 \ 	if line("'\"") > 0 && line("'\"") <= line("$") |
 \   exe "normal! g`\"" |
 \ endif
+
+vnoremap ,c I#<space><esc><esc>
+vnoremap ,u :normal xx<CR>
+noremap <space> viw " select a word
+nnoremap <leader>- ddp
+nnoremap <leader>_ ddkP
+inoremap <c-u> <esc>viwUA
+nnoremap <c-u> viwg~
+
+map <leader>vi :vs $MYVIMRC<cr>
+
+:iabbrev nd end
+:iabbrev doe do 
+:inoremap jk <esc>
+
+:autocmd FileType ruby :iabbrev <buffer> iff if (   )<left>
+
+:autocmd BufWritePre *.html.erb :normal gg=G
+
+
+autocmd FileType html :iabbrev <buffer> div <div></div><esc>^5l
+autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> div <div></div><esc>^5l
+autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> h1 <h1></h1><esc>^4l
+autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> h2 <h2></h2><esc>^4l
+autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> h3 <h3></h3><esc>^4l
+autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> h4 <h4></h4><esc>^4l
+autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> h5 <h5></h5><esc>^4l
+autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> h6 <h6></h6><esc>^4l
+autocmd BufWritePre *.html.erb :normal gg=G
