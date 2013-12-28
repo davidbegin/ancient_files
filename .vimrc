@@ -1,12 +1,14 @@
 filetype plugin indent on
 syntax on
+filetype on
 set number
 set numberwidth=2
 
 set tabstop=2
 set shiftwidth=2
 
-
+noremap <leader>nn  :s/to/not_to<cr>
+noremap <leader>na  :%s/to/not_to<cr>
 noremap <leader>vv  :CommandTFlush<cr>\|:CommandT app/views<cr>
 noremap <leader>cc  :CommandTFlush<cr>\|:CommandT app/controllers<cr>
 noremap <leader>mm  :CommandTFlush<cr>\|:CommandT app/models<cr>
@@ -20,19 +22,26 @@ noremap <leader>ss  :vs db/seeds.rb<cr>
 noremap <leader>log :vs log/development.log<cr>
 noremap <leader>mig :CommandTFlush<cr>\|:CommandT db/migrate<cr>
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
-noremap <leader>e   :edit %%
-noremap ,s :w\|:!rspec<cr>
+
+
+noremap ,s :w\|:!zeus rspec spec<cr>
+noremap ,z :w\|:!zeus rspec spec<cr>
+noremap ,x :w\|:!zeus rspec %:p<cr>
+" noremap ,c :w\|:!zeus rspec --tag focus %:p<cr>
 noremap ,f :w\|:!rspec --tag focus<cr>
-" noremap ,c :w\|:!cucumber<cr>
+noremap ,c :w\|:!time zeus cucumber<cr>
 noremap ,r :w\|:!ruby %:p<cr>
 noremap ,n :w\|:!ruby %:t
-noremap ,t :w\|:!rspec %:p<cr>
-noremap ,p :w\|:!python %:t<cr>
+noremap ,t :w\|:!zeus rspec %:p<cr>
+" noremap ,p :w\|:!python %:t<cr>
+noremap ,j :w\|:!rake spec:javascripts<cr>
 noremap <leader>o :!bundle open 
 noremap ,, <esc>:w<cr>
 noremap ,q :q<cr>
 noremap <leader>rc :source ~/.vimrc<cr>
 noremap <leader>cp :topleft 50 :vs %<cr>
+noremap ff :vertical resize 120<cr>
+noremap fm :vertical resize 75<cr>
 
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
@@ -44,31 +53,34 @@ autocmd BufReadPost *
 \   exe "normal! g`\"" |
 \ endif
 
-vnoremap ,c I#<space><esc><esc>
+" vnoremap ,c I#<space><esc><esc>
 vnoremap ,u :normal xx<CR>
 noremap <space> viw " select a word
-nnoremap <leader>- ddp
-nnoremap <leader>_ ddkP
-inoremap <c-u> <esc>viwUA
+nnoremap - ddp
 nnoremap <c-u> viwg~
+nnoremap _ ddkP
+inoremap <c-u> <esc>viwUA
 
 map <leader>vi :vs $MYVIMRC<cr>
 
 :iabbrev nd end
+:iabbrev nde end
+:iabbrev ned end
+:iabbrev edm end
+:iabbrev edn end
+:iabbrev emd end
 :iabbrev doe do 
+:iabbrev esle else
+:cabbrev Vs vs
 :inoremap jk <esc>
 
-:autocmd FileType ruby :iabbrev <buffer> iff if (   )<left>
 
-:autocmd BufWritePre *.html.erb :normal gg=G
+nmap <buffer> <leader>p <Plug>(xmpfilter-mark)
+nmap <buffer> <leader>o <Plug>(xmpfilter-run)
+
+set background=dark
+noremap <leader>e :edit %:h<cr>
+
+autocmd FileType eruby setlocal nowrap
 
 
-autocmd FileType html :iabbrev <buffer> div <div></div><esc>^5l
-autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> div <div></div><esc>^5l
-autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> h1 <h1></h1><esc>^4l
-autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> h2 <h2></h2><esc>^4l
-autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> h3 <h3></h3><esc>^4l
-autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> h4 <h4></h4><esc>^4l
-autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> h5 <h5></h5><esc>^4l
-autocmd BufNewFile,BufRead *.html.erb :iabbrev <buffer> h6 <h6></h6><esc>^4l
-autocmd BufWritePre *.html.erb :normal gg=G
